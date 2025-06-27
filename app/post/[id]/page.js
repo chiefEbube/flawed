@@ -7,7 +7,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Navbar } from "@/components/navbar"
-import { ArrowLeft, Edit, Trash2, Calendar, User } from "lucide-react"
+import { ArrowLeft, Edit, Calendar, User } from "lucide-react"
 import Link from "next/link"
 import { apiRequest } from "@/lib/apiRequest"
 import { deletePost } from "@/lib/actions"
