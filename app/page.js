@@ -66,7 +66,7 @@ export default function HomePage() {
       <Navbar />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Latest Posts</h1>
+          <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2">Latest Posts</h1>
           <p className="text-gray-600">Discover amazing content from our community</p>
         </div>
 
@@ -75,10 +75,10 @@ export default function HomePage() {
             <Card key={post.id} className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex justify-between items-start">
-                  <Badge variant={post.published === true ? "default" : "secondary"}>{post.published === true ? "published" : "draft"}</Badge>
+                  <Badge className="mb-1 py-1" variant={post.published === true ? "default" : "secondary"}>{post.published === true ? "published" : "draft"}</Badge>
                   <span className="text-sm text-gray-500">{new Date(post.createdAt).toLocaleDateString()}</span>
                 </div>
-                <CardTitle className="line-clamp-2">{post.title}</CardTitle>
+                <CardTitle className="leading-6">{post.title}</CardTitle>
                 <CardDescription>By {post.author.name}</CardDescription>
               </CardHeader>
               <CardContent>
