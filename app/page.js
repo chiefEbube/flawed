@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/navbar"
@@ -33,21 +34,19 @@ export default function HomePage() {
   }
 
   async function handleDelete(postId) {
-    if (confirm("Are you sure you want to delete this post?")) {
-      const token = localStorage.getItem("token")
-      try {
-        const result = await deletePost(postId, token)
+    const token = localStorage.getItem("token")
+    try {
+      const result = await deletePost(postId, token)
 
-        if (result.success) {
-          toast(result.message)
-          await fetchPosts()
-        } else {
-          toast(result.message)
-        }
-      } catch (err) {
-        console.error("Error deleting post:", err)
-        toast("Error deleting post")
+      if (result.success) {
+        toast(result.message)
+        await fetchPosts()
+      } else {
+        toast(result.message)
       }
+    } catch (err) {
+      console.error("Error deleting post:", err)
+      toast("Error deleting post")
     }
   }
 
@@ -96,14 +95,29 @@ export default function HomePage() {
                         Edit
                       </Button>
                     </Link>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-red-600 hover:text-red-700"
-                      onClick={() => handleDelete(post.id)}
-                    >
-                      Delete
-                    </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="text-red-600 hover:text-red-700">
+                          Delete
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            This action cannot be undone. This will permanently delete and remove your post from our servers.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction onClick={() => handleDelete(post.id)}>Continue</AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+
                   </div>
                 </div>
               </CardContent>
