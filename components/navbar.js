@@ -13,19 +13,13 @@ export function Navbar() {
   const router = useRouter()
 
   useEffect(() => {
-    const userData = localStorage.getItem("token")
+    const userData = localStorage.getItem("user")
     if (userData) {
-      setUser({ name: "User" }) // Simulating user data, should be fetched from API
+      setUser(userData ? JSON.parse(userData) : null)
     }
   }, [])
 
-  // INTENTIONAL FLAW: Logout doesn't clear token, only redirects
   const handleLogout = () => {
-    // This should clear localStorage but doesn't
-    // localStorage.removeItem('token')
-    // localStorage.removeItem('user')
-
-    // Only redirects without clearing auth data
     router.push("/login")
   }
 
