@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
-import { LogOut, PlusCircle, Home} from "lucide-react"
+import { LogOut, PlusCircle, Home } from "lucide-react"
 
 export function Navbar() {
   const [user, setUser] = useState(null)
@@ -15,7 +15,7 @@ export function Navbar() {
   useEffect(() => {
     const userData = localStorage.getItem("token")
     if (userData) {
-      setUser({name: "User"}) // Simulating user data, should be fetched from API
+      setUser({ name: "User" }) // Simulating user data, should be fetched from API
     }
   }, [])
 
@@ -37,13 +37,7 @@ export function Navbar() {
             <Link href="/" className="text-xl font-bold text-gray-900">
               DEV BLOG
             </Link>
-            <div className="hidden md:flex space-x-4">
-              <Link href="/">
-                <Button variant="ghost" className="flex items-center gap-2">
-                  <Home className="h-4 w-4" />
-                  Home
-                </Button>
-              </Link>
+            <div className="flex space-x-4">
               {user && (
                 <>
                   <Link href="/create">
@@ -68,10 +62,18 @@ export function Navbar() {
                     <span className="hidden md:inline">{user.name}</span>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+                <DropdownMenuContent align="end" className="px-2">
                   <DropdownMenuItem onClick={handleLogout} className="flex items-center gap-2">
                     <LogOut className="h-4 w-4" />
                     Logout
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/create">
+                      <div variant="ghost" className="flex items-center gap-2">
+                        <PlusCircle className="h-4 w-4" />
+                        Create New Post
+                      </div>
+                    </Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
