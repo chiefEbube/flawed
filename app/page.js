@@ -40,7 +40,6 @@ export default function HomePage() {
 
         if (result.success) {
           toast(result.message)
-          // Refresh the posts list after successful deletion
           await fetchPosts()
         } else {
           toast(result.message)
@@ -68,7 +67,7 @@ export default function HomePage() {
       <Navbar />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Latest Blog Posts</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Latest Posts</h1>
           <p className="text-gray-600">Discover amazing content from our community</p>
         </div>
 
@@ -91,7 +90,6 @@ export default function HomePage() {
                       Read More
                     </Button>
                   </Link>
-                  {/* INTENTIONAL FLAW: No auth check for edit/delete buttons */}
                   <div className="space-x-2">
                     <Link href={`/edit/${post.id}`}>
                       <Button variant="ghost" size="sm">
