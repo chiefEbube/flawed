@@ -60,7 +60,7 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <Alert variant="destructive">
-                <AlertDescription>{error}</AlertDescription>
+                <AlertDescription>{error || "Invalid credentials"}</AlertDescription>
               </Alert>
             )}
 
